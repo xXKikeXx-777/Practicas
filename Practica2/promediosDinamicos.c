@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h> // Necesario para malloc, realloc y free
 
 void main(){
     printf("=== Calculadora de Promedio Dinámica ===\n\n");
     int opcion = 0;
+    float *calificaciones = NULL; // Puntero para almacenar calificaciones dinámicamente
+    int total_calificaciones = 0; // Contador del total de calificaciones ingresadas
 
     while(opcion != 2){
         printf("1) Ingresar calificaciones\n");
