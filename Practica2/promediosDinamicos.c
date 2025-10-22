@@ -62,7 +62,7 @@ void main(){
             printf("\nPromedio: %.2f\n", promedio);
 
             // Muestra si aprobó o reprobó
-            if(promedio >= 7.0)
+            if(promedio >= 6.0)
                 printf("Estado: APROBADO\n");
             else
                 printf("Estado: REPROBADO\n");
