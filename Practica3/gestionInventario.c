@@ -97,10 +97,21 @@ int agregarProducto() {
     return 1;
 }
 
-void mostrarProductos() {
-	printf("=== Productos %d ===\n", numProductos);
-	// Recorrer todos los productos he imprimirlos
-	// Mostrar: Posición, Nombre, Cantidad, Precio, Valor total
+void mostrarProductos() { 
+    if (totalP == 0) {
+        printf("No hay productos en el inventario.\n");
+        return;
+    }
+
+    printf("\n=== Productos %d ===\n", totalP);
+    printf("Pos\tNombre\t\t\tCantidad\tPrecio\t\tValor\n");
+    printf("--------------------------------------------------------------\n");
+
+    for (int i = 0; i < totalP; i++) {
+        float valor = cantidades[i] * precios[i];
+        printf("Pos %d: %s - Cant: %d - Precio: $%.2f - Valor: $%.2f\n",
+               i, nombresProductos[i], cantidades[i], precios[i], valor);
+    }
 }
 
 double calcularValorTotalInventario() {
