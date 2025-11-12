@@ -115,10 +115,18 @@ void mostrarProductos() {
 }
 
 double calcularValorTotalInventario() {
-	double total = 0;
-	// Recorrer todos los productos de la categoría
-	// Sumar: cantidad * precio para cada producto
-	return total;
+    double total = 0;
+
+    if (totalP == 0) {
+        printf("No hay productos en el inventario.\n");
+        return 0;
+    }
+
+    for (int i = 0; i < totalP; i++) {
+        total += cantidades[i] * precios[i];
+    }
+
+    return total;
 }
 
 void liberarInventario() {
