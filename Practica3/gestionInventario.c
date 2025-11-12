@@ -14,6 +14,7 @@ void mostrarProductos();           // Muestra el inventario
 double calcularValorTotalInventario(); // Calcula el valor total
 void liberarInventario();          // Libera la memoria usada
 void llenarInventarioInicial();    // Llena el inventario base
+void buscarProductoPorNombre(); // buscar el producto por nobre
 
 int main() {
     int opcion;
@@ -28,7 +29,8 @@ int main() {
         printf("1. Agregar producto\n");
         printf("2. Mostrar inventario\n");
         printf("3. Calcular valor total del inventario\n");
-        printf("4. Salir\n");
+        printf("4. Buscar producto\n");
+        printf("5. Salir\n");
         printf("Seleccione opcion: ");
         scanf("%d", &opcion);
 
@@ -44,8 +46,10 @@ int main() {
                 printf("Valor total del inventario: $%.2f\n", calcularValorTotalInventario());
                 break;
             case 4:
-                printf("Saliendo del sistema...\n"); // Sale del programa
+                buscarProductoPorNombre();
                 break;
+            case 5:
+                printf("Saliendo del sistema...\n"); // Sale del programa
             default:
                 printf("Opcion invalida.\n"); // Error si elige mal
         }
