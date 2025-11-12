@@ -190,3 +190,35 @@ void llenarInventarioInicial() {
 
     printf("Inventario inicial cargado con %d productos.\n", totalP); // Confirma carga
 }
+void buscarProductoPorNombre() {
+    if (totalP == 0) {
+        printf("No hay productos en el inventario.\n");
+        return;
+    }
+
+    char nombreBuscado[100];
+    printf("\n=== BUSCAR PRODUCTO POR NOMBRE ===\n");
+    printf("Ingrese el nombre del producto: ");
+    scanf(" %[^\n]", nombreBuscado);
+
+    int encontrado = 0;
+
+    // Recorre usando notación de punteros
+    for (int i = 0; i < totalP; i++) {
+        char *nombreActual = *(nombresProductos + i);
+
+        if (strcasecmp(nombreActual, nombreBuscado) == 0) { // Comparación sin importar mayúsculas/minúsculas
+            printf("\nProducto encontrado:\n");
+            printf("Nombre: %s\n", nombreActual);
+            printf("Cantidad: %d\n", *(cantidades + i));
+            printf("Precio: $%.2f\n", *(precios + i));
+            printf("Valor total: $%.2f\n", ((cantidades + i)) * ((precios + i)));
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("No se encontró ningún producto con ese nombre.\n");
+    }
+}
