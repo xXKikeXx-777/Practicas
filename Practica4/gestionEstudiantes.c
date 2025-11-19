@@ -7,52 +7,52 @@ typedef struct {
     double promedio;
 } Estudiante;
 
-// Prototipos
+// Prototipos de funciones
 void capturarEstudiante(Estudiante *est);
 void calcularPromedio(Estudiante *est);
 void mostrarEstudiante(Estudiante est);
 
-int main(){
-    Estudiante grupo[3];
-		
+int main() {
+    Estudiante grupo[4]; // Arreglo de 4 estudiantes
+
     printf("=== SISTEMA DE GESTIÓN ACADÉMICA ===\n");
-	
-    // Capturar datos de 3 estudiantes
-    for(int i = 0; i < 3; i++) {
-        printf("\nEstudiante %d:\n", i+1);
+
+    // Capturar datos de 4 estudiantes
+    for(int i = 0; i < 4; i++) {
+        printf("\nEstudiante %d:\n", i + 1);
         capturarEstudiante(&grupo[i]);
     }
-	
+
     // Mostrar todos los estudiantes
     printf("\n=== LISTA COMPLETA DE ESTUDIANTES ===\n");
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < 4; i++) {
         mostrarEstudiante(grupo[i]);
     }
-	
-    // Encontrar el mejor promedio
+
+    // Encontrar al estudiante con mejor promedio
     int mejorIndex = 0;
-    for(int i = 1; i < 3; i++){
-        if(grupo[i].promedio > grupo[mejorIndex].promedio){
+    for(int i = 1; i < 4; i++) {
+        if(grupo[i].promedio > grupo[mejorIndex].promedio) {
             mejorIndex = i;
         }
     }
-	
+
     printf("\n=== ESTUDIANTE CON MEJOR PROMEDIO ===\n");
     printf("Nombre: %s\n", grupo[mejorIndex].nombre);
     printf("Promedio: %.2f\n", grupo[mejorIndex].promedio);
-	
+
     return 0;
 }
 
-// Función para capturar datos de un estudiante
+// Función para capturar los datos de un estudiante
 void capturarEstudiante(Estudiante *est) {
-    printf("Nombre: ");
+    printf("Ingrese nombre: ");
     scanf("%s", est->nombre);
 
-    printf("Matrícula: ");
+    printf("Ingrese matrícula: ");
     scanf("%d", &est->matricula);
 
-    printf("Ingrese las 4 calificaciones:\n");
+    printf("Ingrese 4 calificaciones:\n");
     for(int i = 0; i < 4; i++) {
         printf("Calificación %d: ", i + 1);
         scanf("%lf", &est->calificaciones[i]);
@@ -61,7 +61,7 @@ void capturarEstudiante(Estudiante *est) {
     calcularPromedio(est);
 }
 
-// Función para calcular promedio
+// Función para calcular el promedio del estudiante
 void calcularPromedio(Estudiante *est) {
     double suma = 0;
     for(int i = 0; i < 4; i++) {
@@ -70,7 +70,7 @@ void calcularPromedio(Estudiante *est) {
     est->promedio = suma / 4.0;
 }
 
-// Función para mostrar datos de un estudiante
+// Función para mostrar los datos de un estudiante
 void mostrarEstudiante(Estudiante est) {
     printf("\n--- Información del Estudiante ---\n");
     printf("Nombre: %s\n", est.nombre);
