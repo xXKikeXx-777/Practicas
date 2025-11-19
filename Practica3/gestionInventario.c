@@ -1,63 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <strings.h> //  Para usar strcasecmp (comparar sin mayúsculas/minúsculas)
+#include <strings.h>
 
-// Punteros dobles globales para el inventario
-char **nombresProductos = NULL;   // Guarda los nombres de los productos
-int *cantidades = NULL;           // Guarda las cantidades
-float *precios = NULL;            // Guarda los precios
-int totalP = 0;                   // Número total de productos
+char **nombresProductos = NULL;
+int *cantidades = NULL;
+float *precios = NULL;
+int totalP = 0;
 
-// Prototipos de funciones
 int agregarProducto();             
 void mostrarProductos();           
 double calcularValorTotalInventario(); 
 void liberarInventario();          
 void llenarInventarioInicial();    
-void buscarProductoPorNombre();    
-void actualizarStock(); // 🔹 Nueva función para modificar cantidades
+void buscarProductoPorNombre();    // buscarProductoPorNombre
+void actualizarStock();            // actualizarStock
 
 int main() {
     int opcion;
 
     printf("=== SISTEMA DE INVENTARIO ===\n");
 
-    llenarInventarioInicial(); // Carga productos iniciales
+    llenarInventarioInicial();
 
-    // Menú interactivo
     do {
         printf("\n--- MENU PRINCIPAL ---\n");
         printf("1. Agregar producto\n");
         printf("2. Mostrar inventario\n");
         printf("3. Calcular valor total del inventario\n");
         printf("4. Buscar producto\n");
-        printf("5. Actualizar stock\n"); //  Nueva opción
+        printf("5. Actualizar stock\n");
         printf("6. Salir\n");
         printf("Seleccione opcion: ");
         scanf("%d", &opcion);
 
         switch(opcion) {
-            case 1:
-                agregarProducto();
-                break;
-            case 2:
-                mostrarProductos();
-                break;
-            case 3:
-                printf("Valor total del inventario: $%.2f\n", calcularValorTotalInventario());
-                break;
-            case 4:
-                buscarProductoPorNombre();
-                break;
-            case 5:
-                actualizarStock(); //  Llama a la nueva función
-                break;
-            case 6:
-                printf("Saliendo del sistema...\n");
-                break;
-            default:
-                printf("Opcion invalida.\n");
+            case 1: agregarProducto(); break;
+            case 2: mostrarProductos(); break;
+            case 3: printf("Valor total del inventario: $%.2f\n", calcularValorTotalInventario()); break;
+            case 4: buscarProductoPorNombre(); break;
+            case 5: actualizarStock(); break;
+            case 6: printf("Saliendo del sistema...\n"); break;
+            default: printf("Opcion invalida.\n");
         }
     } while(opcion != 6);
 
@@ -80,7 +64,6 @@ int agregarProducto() {
 
     int nuevoTotal = totalP + 1;
 
-    // Reasignar memoria para nuevos datos
     char **tempNombres = realloc(nombresProductos, nuevoTotal * sizeof(char *));
     int *tempCantidades = realloc(cantidades, nuevoTotal * sizeof(int));
     float *tempPrecios = realloc(precios, nuevoTotal * sizeof(float));
@@ -120,7 +103,7 @@ void mostrarProductos() {
     }
 
     printf("\n=== Productos %d ===\n", totalP);
-    printf("Pos\tNombre\t\t\tCantidad\tPrecio\t\tValor\n");
+    printf("Pos\tNombre\t\tCantidad\tPrecio\t\tValor\n");
     printf("--------------------------------------------------------------\n");
 
     for (int i = 0; i < totalP; i++) {
@@ -189,6 +172,7 @@ void llenarInventarioInicial() {
     printf("Inventario inicial cargado con %d productos.\n", totalP);
 }
 
+// buscarProductoPorNombre
 void buscarProductoPorNombre() {
     if (totalP == 0) {
         printf("No hay productos en el inventario.\n");
@@ -210,7 +194,7 @@ void buscarProductoPorNombre() {
             printf("Nombre: %s\n", nombreActual);
             printf("Cantidad: %d\n", *(cantidades + i));
             printf("Precio: $%.2f\n", *(precios + i));
-            printf("Valor total: $%.2f\n", ((cantidades + i)) * ((precios + i)));
+            printf("Valor total: $%.2f\n", (*(cantidades + i)) * (*(precios + i)));
             encontrado = 1;
             break;
         }
@@ -221,7 +205,7 @@ void buscarProductoPorNombre() {
     }
 }
 
-// 🔹 NUEVA FUNCIÓN: ACTUALIZAR STOCK
+// actualizarStock
 void actualizarStock() {
     if (totalP == 0) { 
         printf("No hay productos en el inventario.\n");
@@ -233,27 +217,23 @@ void actualizarStock() {
     printf("Ingrese la posición del producto a actualizar (0 - %d): ", totalP - 1);
     scanf("%d", &posicion);
 
-    // Verifica que la posición exista
     if (posicion < 0 || posicion >= totalP) { 
         printf("Error: posición inválida.\n");
         return;
     }
 
-    // Muestra producto actual antes del cambio
     printf("Producto actual: %s - Stock: %d\n", *(nombresProductos + posicion), *(cantidades + posicion));
 
     int nuevaCantidad;
     printf("Ingrese la nueva cantidad: ");
     scanf("%d", &nuevaCantidad);
 
-    // Valida que la cantidad no sea negativa
     if (nuevaCantidad < 0) { 
         printf("Error: la cantidad no puede ser negativa.\n");
         return;
     }
 
-    // Actualiza el stock (usando notación de punteros)
-    *(cantidades + posicion) = nuevaCantidad; //  Asigna la nueva cantidad
+    *(cantidades + posicion) = nuevaCantidad;
 
-    printf("Stock actualizado correctamente.\n"); //  Confirma la actualización
+    printf("Stock actualizado correctamente.\n");
 }
