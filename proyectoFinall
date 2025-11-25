@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* ======= ESTRUCTURAS DE DATOS ======= */
+
+// Estructura Libro
+typedef struct {
+    int id;
+    char titulo[100];
+    char autor[50];
+    char isbn[20];
+    int anio;
+    char categoria[30];
+    int disponible; // 1 = disponible, 0 = prestado
+} Libro;
+
+// Estructura Usuario
+typedef struct {
+    int id;
+    char nombre[50];
+    char carrera[50];
+    int matricula;
+    int activo; // 1 = activo, 0 = inactivo
+} Usuario;
+
+/* ======= AQUI DESPUÉS VAN TUS FUNCIONES ======= */
+
+int main() {
+    return 0;
+}
