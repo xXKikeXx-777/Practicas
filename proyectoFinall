@@ -23,7 +23,15 @@ typedef struct {
     int matricula;
     int activo; // 1 = activo, 0 = inactivo
 } Usuario;
-
+// ======================= ESTRUCTURA PRÉSTAMO =======================
+typedef struct {
+    int id;                     // ID único del préstamo
+    int id_libro;               // ID del libro prestado
+    int id_usuario;             // ID del usuario
+    char fecha_prestamo[20];    // "DD/MM/AAAA"
+    char fecha_devolucion[20];  // Fecha límite
+    int devuelto;               // 1 = devuelto, 0 = activo
+} Prestamo;
 /* ======= AQUI DESPUÉS VAN TUS FUNCIONES ======= */
 
 int main() {
